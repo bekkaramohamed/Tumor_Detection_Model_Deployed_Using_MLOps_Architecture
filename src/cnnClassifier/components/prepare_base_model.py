@@ -11,7 +11,7 @@ class PrepareBaseModel:
     def __init__(self, config: PrepareBaseModelConfig):
         self.config = config
 
-    # use VGG19 model from tensorflow librairy. Set up args with params.yaml
+    # use VGG19 model from tensorflow librairy. We set up args with params.yaml
     def get_base_model(self):
         self.model = tf.keras.applications.vgg19.VGG19(
             input_shape=self.config.params_image_size,
@@ -22,7 +22,7 @@ class PrepareBaseModel:
         self.save_model(path=self.config.base_model_path, model=self.model)
 
 
-    
+    # Fine-tuning : we freeze all the layers already pretrained on ImageNet Dataset 
     @staticmethod
     def _prepare_full_model(model, classes, freeze_all, freeze_till, learning_rate):
         if freeze_all:

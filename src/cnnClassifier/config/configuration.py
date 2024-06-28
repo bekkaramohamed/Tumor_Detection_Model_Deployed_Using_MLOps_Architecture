@@ -19,7 +19,7 @@ class ConfigurationManager:
         create_directories([self.config.artifacts_root])
 
 
-    
+    # stage 01 ocnfig
     def get_data_ingestion_config(self) -> DataIngestionConfig:
         config = self.config.data_ingestion
 
@@ -34,7 +34,7 @@ class ConfigurationManager:
 
         return data_ingestion_config
     
-
+    #stage 2 config
     def get_prepare_base_model_config(self) -> PrepareBaseModelConfig:
         config = self.config.prepare_base_model
         
@@ -54,12 +54,12 @@ class ConfigurationManager:
         return prepare_base_model_config
     
 
-
+    #stage 3 config
     def get_training_config(self) -> TrainingConfig:
         training = self.config.training
         prepare_base_model = self.config.prepare_base_model
         params = self.params
-        training_data = os.path.join(self.config.data_ingestion.unzip_dir, "Dataset")
+        training_data = os.path.join(self.config.data_ingestion.unzip_dir, "brain_tumor_dataset")
         create_directories([
             Path(training.root_dir)
         ])
@@ -79,12 +79,13 @@ class ConfigurationManager:
     
 
 
-
+    # stage 4 config
     def get_evaluation_config(self) -> EvaluationConfig:
+        # we evaluate on mlflow throught dagshub. We need to connecto our github repo with dagshub repo before.
         eval_config = EvaluationConfig(
             path_of_model="artifacts/training/model.h5",
-            training_data="artifacts/data_ingestion/Dataset",
-            mlflow_uri="https://dagshub.com/entbappy/Tumor_Detection_Model_Deployed_Using_MLOps_Architecture.mlflow",
+            training_data="artifacts/data_ingestion/brain_tumor_dataset",
+            mlflow_uri="https://dagshub.com/bekkaramohamed/Tumor_Detection_Model_Deployed_Using_MLOps_Architecture.mlflow",
             all_params=self.params,
             params_image_size=self.params.IMAGE_SIZE,
             params_batch_size=self.params.BATCH_SIZE

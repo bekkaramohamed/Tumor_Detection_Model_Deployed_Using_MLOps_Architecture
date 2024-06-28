@@ -12,6 +12,8 @@ import base64
 
 
 
+# Commons functions for our stages.
+
 @ensure_annotations
 def read_yaml(path_to_yaml: Path) -> ConfigBox:
     """reads yaml file and returns

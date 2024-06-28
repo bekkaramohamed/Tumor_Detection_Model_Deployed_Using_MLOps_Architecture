@@ -6,12 +6,12 @@ from urllib.parse import urlparse
 from cnnClassifier.entity.config_entity import EvaluationConfig
 from cnnClassifier.utils.common import read_yaml, create_directories,save_json
 
-
+# Evaluation with mlflow
 class Evaluation:
     def __init__(self, config: EvaluationConfig):
         self.config = config
 
-    
+    # prepare data generator
     def _valid_generator(self):
 
         datagenerator_kwargs = dict(
@@ -52,7 +52,7 @@ class Evaluation:
         scores = {"loss": self.score[0], "accuracy": self.score[1]}
         save_json(path=Path("scores.json"), data=scores)
 
-    
+    # log into mlflow to compare models between them
     def log_into_mlflow(self):
         mlflow.set_registry_uri(self.config.mlflow_uri)
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
@@ -64,11 +64,7 @@ class Evaluation:
             )
             # Model registry does not work with file store
             if tracking_url_type_store != "file":
-
-                # Register the model
-                # There are other ways to use the Model Registry, which depends on the use case,
-                # please refer to the doc for more information:
-                # https://mlflow.org/docs/latest/model-registry.html#api-workflow
-                mlflow.keras.log_model(self.model, "model", registered_model_name="VGG16Model")
+                print("we register")
+                mlflow.keras.log_model(self.model, "model", registered_model_name="VGG19Model")
             else:
                 mlflow.keras.log_model(self.model, "model")

@@ -2,6 +2,8 @@ import os
 import sys
 import logging
 
+# Keeps logs for debugs
+
 logging_str = "[%(asctime)s: %(levelname)s: %(module)s: %(message)s]"
 
 log_dir = "logs"

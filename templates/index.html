@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tumor Detection</title>
+	<link rel="shortcut icon"
+        href="data:image/png;base64,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" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<style>
+		body{background-color: #eff2f9;}
+		.iupload h3{color: #1b2d6b;font-size: 30px;font-weight: 700;}
+		.img-part{height:300px;width:300px;margin:0px auto;}
+		.image-part{height:300px;width:300px;border:1px solid #1b2d6b;}
+		.image-part img{position:absolute;height: 300px;width:300px;display:none;padding:5px;}
+		.image-part #video{display:block;height: 300px;width:300px;padding:5px;}
+		.res-part{border:1px solid #dedede;margin-left:20px;height: 310px;width:100%;padding:5px;margin:0px auto;overflow:auto;}
+		.res-part2{border:1px solid #dedede;height: 310px;width:100%;padding:5px;margin:0px auto;}
+		.resp-img{height: 298px;width: 233px;margin:0px auto;}
+		.jsonRes{margin-left:30px;}
+		#send{cursor:pointer;}
+		.btn-part{width:325px;}
+		textarea,
+		select,
+		.form-control,
+		.custom-select,
+		button.btn,
+		.btn-primary,
+		input[type="text"],
+		input[type="url"],
+		.uneditable-input{
+			border: 1px solid #363e75;
+			outline: 0 !important;
+			border-radius:0px;
+			box-shadow: none;
+		   -webkit-box-shadow: none;
+		   -moz-box-shadow: none;
+		   -moz-transition: none;
+		   -webkit-transition: none;
+		}
+		textarea:focus,
+		select:focus,
+		.form-control:focus,
+		.btn:focus,
+		.btn-primary:focus,
+		.custom-select:focus,
+		input[type="text"]:focus,
+		.uneditable-input:focus{
+			border: 1px solid #007bff;
+			outline: 0 !important;
+			border-radius:0px;
+			box-shadow: none;
+		   -webkit-box-shadow: none;
+		   -moz-box-shadow: none;
+		   -moz-transition: none;
+		   -webkit-transition: none;
+		}
+		#loading {
+			position: fixed;
+			left: 0px;
+			top: 0px;
+			width: 100%;
+			height: 100%;
+			z-index: 9999999999;
+			overflow: hidden;
+			background: rgba(255, 255, 255, 0.7);
+		}
+		.loader {
+			border: 8px solid #f3f3f3;
+			border-top: 8px solid #363e75;
+			border-radius: 50%;
+			width: 60px;
+			height: 60px;
+			left: 50%;
+			margin-left: -4em;
+			display: block;
+			animation: spin 2s linear infinite;
+		}
+		.loader,
+		.loader:after {display: block;position: absolute;top: 50%;margin-top: -4.05em;}
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+		.right-part{border:1px solid #dedede;padding:5px;}
+		.logo{position:absolute;right:0px;bottom:0px;margin-right:30px;margin-bottom:30px;}
+	</style>
+</head>
+<body>
+    <div class="main container">
+		<section class="iupload">
+			<h3 class="text-center py-4">Tumor Detection</h3>
+			<div class="row">
+				<div class="img-part col-md-6">
+					<div class="image-part">
+						<img src="" id="photo">
+						<canvas style="display:none;" id="canvas"></canvas>
+					</div>
+					<div class="btn-part">
+						<form id="upload-data pt-3" class="">
+							<div class="input-group mt-3 row">
+								<button type="button" class="btn btn-primary col-md-5 col-xs-5 ml-3 mr-4" id="uload">Upload</button>
+								<button id="send" type="button" class="btn btn-success col-md-5 col-xs-5">Predict</button>
+							</div>
+
+
+
+
+
+
+							<!-- change url value  -->
+
+
+
+
+							<input type="hidden" class="form-control mr-2" id="url" placeholder="Enter REST Api url..." value="../predict"/>
+							<input name="upload" type="file" id="fileinput" style="position:absolute;top:-500px;"/><br/>
+						</form>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12 right-part">
+					<h5 class="mb-2"><center>Prediction Results</center></h5>
+					<div class="row">
+						<div class="res-part2 col-md-5 col-xs-12"></div>
+						<div class="res-part col-md-5 col-xs-12"><div class="jsonRes"></div></div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIkAAAAlCAMAAABBJDpuAAAAVFBMVEX/fgD/iQA7NzIyMjMnNYInNYEnNYInNYEzMzInNYQnNYETJzsnNYIwN1wxMjNoTis4O1YrNm0xOF47PE9DP0dEQEVpTVkAJJ4nNYEOLJHJbiAzMzOmmmHRAAAAFnRSTlOh/vu+986oen9fP2UqEzQkFAIDAAEEILVBJQAAA3FJREFUWMPNmO2WoyAMQG0VBARtdVRs3/89NwkgaF1rd2aOm18tIrnkgwSz7n+R7LcV1ELkeS7E7VySRlyfQXJhTiO55c+liP4cEuH1X8E7gaV+S3Jv2zYZ/Vr+/Sdx2vP6doc/fSPcf/GOpLSFVXFUW8t+giRP47TOd60yk1hbxIhSP0ACKPWrvw7YBIT/lcQY84G3Wk17ugWQfg5UsQJpjflKSLQi7xTWyk0SXTJ4VnB5D1yccxmp4Z+mX5KGNS+SPXVNll0ulyxL0wYmloBB6zL/MpCoAgjAJiUM6w0SboMwPUdRogvNKcNM3smFdRvEcJJkKcflQa+X0pNIfBGW0zKqjyQtw4VLKQlI7ZLgdrRNSZDjMQx2GB4pCkxkCrfGWUTJ0Egan6muCHgJCUwtnCk0mrJ9Q8K5LUqtdSfynkAedhynaRqngVDaXLiJEAzkFkM71IuIlWRYtSQpbXSZDvQ7JPCei9brs+oaABkn74LRIkpFaVxGnzjvIxTYREOoEwn5r01JTDRTcO87Eu3zNUeTPKZpjrIRrNIDCjzALbPk7LJMIokOEQu2K7yKQAKvFDF9pVe0R+LGb7h1MMkw2ijjA/1zhSfSphvEAChXJEhAqwYStIJWXnTpvbdH4hTUwSQ2JRmQpILDLYbB7J41SYiLcNozu5Z3JMo7RxBJahI7WSRByCMkqJt9hySESbVJcvmARJGFExJmdBSl2oM2+T4JLWfgaGFptizlPUm1FydHSdyZ7UnS4ySph2kS0kJrkvr5NJg7dnrJnfxgxPozRPGtkyPNOxtaiDvbIAF9L+5B5zTI2BwlwXmM+U3zReav3o0F8oUEFFZ42McDZYomOUziFmezgWyo251Uc1nyKJol7URCEvIYUEbHYaEGQi9C9egwCdVfHwiaajfjKMUcHcRacCylhWJbJDfq47EEDhYqoIWjHnwDXZPpPiChPQelLU+Cbm4w50FmYgkvFwpiWwCC/Um/SLcNElOC9RVj6qWpCiEMvRUK4zLpdKmPw8rVldy/qxjn60wLrVLWJIPLiZJRr3fsvnOHPvare+lB93tb37T20D82jqOt+zNuXhuNvNhp7X+PpHb3rvV9R5xjE2SpyCN9ffQO+GtWIZr5Xnytz4gTMIRYfys47/uJEXny/aQ/95tSUwmU+uRvSp/IHzQqZYpYrQmxAAAAAElFTkSuQmCC" />
+
+
+<div id="loading"><div class="loader"></div></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+var mybtn = document.getElementById('startbtn');
+var myvideo = document.getElementById('video');
+var mycanvas = document.getElementById('canvas');
+var myphoto = document.getElementById('photo');
+var base_data = "";
+
+function sendRequest(base64Data){
+	var type = "json";
+	if(base64Data != "" || base64Data != null){
+		if(type == "imgtobase"){
+			$(".res-part").html("");
+			$(".res-part").html(base64Data);
+		}
+		else if(type == "basetoimg"){
+			var imageData = $("#imgstring").val();
+			$(".res-part").html("");
+			$(".res-part").append("<img src='data:image/jpeg;base64," + imageData + "' alt='' />");
+		}
+		else{
+			var url = $("#url").val();
+			$("#loading").show();
+			$.ajax({
+				url : url,
+				type: "post",
+				cache: false,
+				async: true,
+				crossDomain: true,
+				headers: {
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin':'*'
+				},
+				data:JSON.stringify({image:base64Data}),
+				success: function(res){
+					$(".res-part").html("");
+					$(".res-part2").html("");
+					try{
+						var imageData = res[1].image;
+						if(imageData.length > 100){
+							if(imageData.length > 10){$(".res-part2").append("<img class='resp-img' src='data:image/jpeg;base64," + imageData + "' alt='' />");}
+						}
+					}catch(e){}
+					$(".res-part").html("<pre>" + JSON.stringify(res[0], undefined, 2) + "</pre>");
+					$("#loading").hide();
+				}
+			});
+		}
+	}
+}
+
+$(document).ready(function(){
+	$("#loading").hide();
+
+	$('#send').click(function(evt){
+		sendRequest(base_data);
+    });
+
+    $('#uload').click(function(evt) {
+        $('#fileinput').focus().trigger('click');
+    });
+	$("#fileinput").change(function(){
+		if (this.files && this.files[0]){
+			var reader = new FileReader();
+			reader.onload = function (e){
+				var url = e.target.result;
+				var img = new Image();
+				img.crossOrigin = 'Anonymous';
+				img.onload = function(){
+					var canvas = document.createElement('CANVAS');
+					var ctx = canvas.getContext('2d');
+					canvas.height = this.height;
+					canvas.width = this.width;
+					ctx.drawImage(this, 0, 0);
+					base_data = canvas.toDataURL('image/jpeg', 1.0).replace(/^data:image.+;base64,/, '');
+					canvas = null;
+				};
+				img.src = url;
+				$('#photo').attr('src', url);
+				$('#photo').show();
+				$('#video').hide();
+			}
+			reader.readAsDataURL(this.files[0]);
+		}
+	});
+});
+
+</script>
+</body>
+</html>

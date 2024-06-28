@@ -1,143 +1,150 @@
-# End-to-End-Chest-Cancer-Classification-using-MLflow-DVC
+# 🧠 Tumor Detection using MLOps Tools (MLflow, DVC, CICD Pipeline, and Deployment on AWS)
+
+## 🎯 Introduction
+
+The aim of this project is to integrate a tumor detection model using MLOps tools and proper architecture to deploy this model on a production instance. We will also create a Flask application, build a CICD pipeline, and deploy our application on an EC2 AWS instance.
+
+## 💻 Installation
+
+1. Clone the GitHub repository:
+    ```bash
+    git clone https://github.com/bekkaramohamed/Classification_using_MLflow_and_DVC
+    ```
+
+2. Create a virtual environment:
+    ```bash
+    python -m venv name_of_your_venv
+    ```
+
+3. Export the following environment variables:
+    ```bash
+    export MLFLOW_TRACKING_URI=https://dagshub.com/username/name_of_your_repository.mlflow
+    export MLFLOW_TRACKING_USERNAME=username
+    export MLFLOW_TRACKING_PASSWORD=dagshub_access_key
+    ```
+
+4. Replace the `mlflow_uri` variable in `config > configuration.py` within the `get_evaluation_config` function with your MLflow tracking URI.
+
+5. Set up the `source_URL` variable in the `config.yaml` file with the URL where your data is stored (e.g., Google Drive).
+
+6. Run the application:
+    ```bash
+    python app.py
+    ```
+
+## 🏗️ Project Architecture Description
+
+### Workflows
+
+In this project, we have created a template that you can reuse for any machine learning project. The architecture is as follows:
+
+1. **config.yaml**: Configuration and paths to get the output of our pipeline.
+2. **Update params.yaml**: Set up parameters for our model.
+3. **Update the entity**: Set up the entity to build our pipeline.
+4. **Update the configuration manager in src/config**: Set up configuration for each pipeline.
+5. **Update the components**: Create components for each stage.
+6. **Update the pipeline**: Create the pipeline.
+7. **Update the main.py**: Run the entire pipeline.
+8. **Update the dvc.yaml**: Set up DVC for pipeline tracking.
+
+## 🛠️ MLflow and DVC Configuration
+
+### MLflow
+
+- **Production Grade**
+- **Track all your experiments**
+- **Logging & tagging your model**
+
+### DVC
+
+- **Lightweight for POC (Proof of Concept)**
+- **Lightweight experiment tracker**
+- **Can perform orchestration (creating pipelines)**
+
+### DVC Commands
+
+1. **Initialize DVC**:
+    ```bash
+    dvc init
+    ```
+
+2. **Run the pipeline**:
+    ```bash
+    dvc repro
+    ```
+
+3. **View the pipeline DAG**:
+    ```bash
+    dvc dag
+    ```
+
+![Diagramme de la pipeline](templates/pipeline.png)
+
+### MLFlow
+
+You can use the MLflow UI directly in the terminal to see your experiments locally, but we will view them on DagsHub. Register on [DagsHub](https://dagshub.com/), link your GitHub repository to a DagsHub repository, and set up your environment variables before running the pipeline. After running, view your experiments on DagsHub by navigating to Remote > Experiment > Go to MLFlow UI.
+
+## 🏥 App
+
+Once the pipeline is run, we can run the app to make predictions by uploading a file and getting the results through the prediction pipeline.
+
+![Diagramme de la pipeline](templates/app_running_example.png)
 
 
-## Workflows
+## 🚀 AWS CICD Deployment with GitHub Actions
 
-1. Update config.yaml
-2. Update secrets.yaml [Optional]
-3. Update params.yaml
-4. Update the entity
-5. Update the configuration manager in src config
-6. Update the components
-7. Update the pipeline 
-8. Update the main.py
-9. Update the dvc.yaml
+### 1. Login to AWS Console
 
+### 2. Create IAM User for Deployment
 
+1. **EC2 Access**: Virtual machine.
+2. **ECR**: Elastic Container Registry to save your Docker image on AWS.
 
+**Description: About the Deployment**
 
+1. Build Docker image of the source code.
+2. Push Docker image to ECR.
+3. Launch your EC2 instance.
+4. Pull your image from ECR on EC2.
+5. Launch your Docker image on EC2.
 
-## MLflow
+**Policies**:
 
-- [Documentation](https://mlflow.org/docs/latest/index.html)
+1. AmazonEC2ContainerRegistryFullAccess
+2. AmazonEC2FullAccess
 
-- [MLflow tutorial](https://youtube.com/playlist?list=PLkz_y24mlSJZrqiZ4_cLUiP0CBN5wFmTb&si=zEp_C8zLHt1DzWKK)
+### 3. Create ECR Repo to Store Docker Image
 
-##### cmd
-- mlflow ui
+Save the URI: `566373416292.dkr.ecr.us-east-1.amazonaws.com/name_image`
 
-### dagshub
-[dagshub](https://dagshub.com/)
+### 4. Create EC2 Machine (Ubuntu)
 
-MLFLOW_TRACKING_URI=https://dagshub.com/entbappy/chest-Disease-Classification-MLflow-DVC.mlflow \
-MLFLOW_TRACKING_USERNAME=entbappy \
-MLFLOW_TRACKING_PASSWORD=6824692c47a4545eac5b10041d5c8edbcef0 \
-python script.py
+### 5. Install Docker on EC2 Machine:
 
-Run this to export as env variables:
-
+**Optional**:
 ```bash
-
-export MLFLOW_TRACKING_URI=https://dagshub.com/entbappy/chest-Disease-Classification-MLflow-DVC.mlflow
-
-export MLFLOW_TRACKING_USERNAME=entbappy 
-
-export MLFLOW_TRACKING_PASSWORD=6824692c47a369aa6f9353c5b10041d5c8edbcef0
+sudo apt-get update -y
+sudo apt-get upgrade
 
 ```
 
+**required**:
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker ubuntu
+newgrp docker
 
-
-### DVC cmd
-
-1. dvc init
-2. dvc repro
-3. dvc dag
-
-
-## About MLflow & DVC
-
-MLflow
-
- - Its Production Grade
- - Trace all of your expriements
- - Logging & taging your model
-
-
-DVC 
-
- - Its very lite weight for POC only
- - lite weight expriements tracker
- - It can perform Orchestration (Creating Pipelines)
-
-
-
-# AWS-CICD-Deployment-with-Github-Actions
-
-## 1. Login to AWS console.
-
-## 2. Create IAM user for deployment
-
-	#with specific access
-
-	1. EC2 access : It is virtual machine
-
-	2. ECR: Elastic Container registry to save your docker image in aws
-
-
-	#Description: About the deployment
-
-	1. Build docker image of the source code
-
-	2. Push your docker image to ECR
-
-	3. Launch Your EC2 
-
-	4. Pull Your image from ECR in EC2
-
-	5. Lauch your docker image in EC2
-
-	#Policy:
-
-	1. AmazonEC2ContainerRegistryFullAccess
-
-	2. AmazonEC2FullAccess
-
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 566373416292.dkr.ecr.us-east-1.amazonaws.com/chicken
-
-	
-## 4. Create EC2 machine (Ubuntu) 
-
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
-
-	sudo apt-get update -y
-
-	sudo apt-get upgrade
-	
-	#required
-
-	curl -fsSL https://get.docker.com -o get-docker.sh
-
-	sudo sh get-docker.sh
-
-	sudo usermod -aG docker ubuntu
-
-	newgrp docker
-	
+```
 # 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
+setting>actions>runner>new self hosted runner> choose os> then run command one by one
 
 
 # 7. Setup github secrets:
 
-    AWS_ACCESS_KEY_ID=
+    AWS_ACCESS_KEY_ID= key_id
 
-    AWS_SECRET_ACCESS_KEY=
+    AWS_SECRET_ACCESS_KEY= secret_key
 
     AWS_REGION = us-east-1
 

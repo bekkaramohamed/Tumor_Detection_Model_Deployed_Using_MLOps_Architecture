@@ -12,11 +12,9 @@ class DataIngestion:
 
 
     
-     
+     # we get data from url. Here, we use gdrive repository
     def download_file(self)-> str:
-        '''
-        Fetch data from the url
-        '''
+
 
         try: 
             dataset_url = self.config.source_URL
@@ -33,13 +31,9 @@ class DataIngestion:
         except Exception as e:
             raise e
         
-    
+    # we extract zip file into the data directory
     def extract_zip_file(self):
-        """
-        zip_file_path: str
-        Extracts the zip file into the data directory
-        Function returns None
-        """
+       
         unzip_path = self.config.unzip_dir
         os.makedirs(unzip_path, exist_ok=True)
         with zipfile.ZipFile(self.config.local_data_file, 'r') as zip_ref:
