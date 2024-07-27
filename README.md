@@ -92,6 +92,8 @@ You can use the MLflow UI directly in the terminal to see your experiments local
 
 Once the pipeline is run, we can run the app to make predictions by uploading a file and getting the results through the prediction pipeline.
 
+![Diagramme de la pipeline](templates/app_running_example.png)
+
 
 ## 🚀 AWS CICD Deployment with GitHub Actions
 
