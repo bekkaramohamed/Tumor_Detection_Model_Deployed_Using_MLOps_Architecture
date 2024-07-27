@@ -27,7 +27,11 @@ The aim of this project is to integrate a tumor detection model using MLOps tool
 
 5. Set up the `source_URL` variable in the `config.yaml` file with the URL where your data is stored (e.g., Google Drive).
 
-6. Run the application:
+6. Run all the pipelines : 
+    ```bash
+    python main.py
+    ```
+7. Run the application:
     ```bash
     python app.py
     ```
